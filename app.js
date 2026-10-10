@@ -320,16 +320,70 @@ function router() {
 }
 window.addEventListener('hashchange', router);
 
-// ============ MODAL ============
+// ============ MODAL (ساخت داینامیک) ============
 function openBuyModal(courseTitle, coursePrice) {
-  const modal = document.getElementById('buy-modal');
+  // حذف مودال قبلی اگه وجود داره
+  const old = document.getElementById('buy-modal');
+  if (old) old.remove();
+
+  // ساخت مودال به صورت داینامیک
+  const modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.id = 'buy-modal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
   modal.dataset.course = courseTitle;
   modal.dataset.price = coursePrice;
-  modal.classList.add('active');
+  modal.innerHTML = `
+    <div class="modal">
+      <h3>خرید دوره</h3>
+      <p class="modal-sub">سفارش خود را از طریق تلگرام ثبت کنید</p>
+
+      <button class="platform-btn" onclick="orderVia()" type="button">
+        <span class="platform-icon" aria-hidden="true">✈️</span>
+        <span class="platform-name">ارسال به تلگرام</span>
+        <span class="platform-hint">@OMIX777</span>
+      </button>
+
+      <button class="copy-btn" onclick="copyOrderText()" type="button">
+        📋 فقط کپی متن سفارش
+      </button>
+
+      <div class="vpn-note">
+        <span class="vpn-icon" aria-hidden="true">🌐</span>
+        <p>اگر تلگرام باز نشد یا پیام ارسال نشد، لطفاً <strong>VPN خود را روشن کنید</strong> و دوباره تلاش کنید. در غیر این صورت از دکمه «کپی متن سفارش» استفاده کنید و متن را دستی ارسال کنید.</p>
+      </div>
+
+      <div class="copy-note">
+        <span class="copy-note-icon" aria-hidden="true">✨</span>
+        <p>
+          متن سفارش <strong>به‌صورت خودکار در کادر چت تلگرام پر می‌شود</strong>.
+          فقط کافیه دکمه ارسال را بزنید. اگر متن پر نشد، از دکمه
+          <strong>«کپی متن سفارش»</strong> استفاده کنید و دستی برای
+          <strong>@OMIX777</strong> بفرستید.
+        </p>
+      </div>
+
+      <button class="modal-close" onclick="closeBuyModal()" type="button">انصراف</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // انیمیشن باز شدن
+  requestAnimationFrame(() => modal.classList.add('active'));
+
+  // بستن با کلیک روی پس‌زمینه
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeBuyModal();
+  });
 }
 
 function closeBuyModal() {
-  document.getElementById('buy-modal').classList.remove('active');
+  const modal = document.getElementById('buy-modal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  setTimeout(() => modal.remove(), 300);
 }
 
 function buildOrderMessage() {
@@ -354,9 +408,7 @@ function orderVia() {
   const encoded = encodeURIComponent(msg);
   const url = `${CONTACT.telegram}?text=${encoded}`;
 
-  // کپی در کلیپ‌بورد به عنوان پشتیبان (اگه تلگرام متن رو پر نکرد)
   navigator.clipboard.writeText(msg).catch(() => {});
-
   showToast('✅ متن آماده شد — در حال باز کردن تلگرام...');
 
   setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 400);
@@ -379,9 +431,6 @@ function showToast(text) {
 }
 
 // ============ EVENTS ============
-document.addEventListener('click', (e) => {
-  if (e.target.classList?.contains('modal-overlay')) closeBuyModal();
-});
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeBuyModal();
 });
