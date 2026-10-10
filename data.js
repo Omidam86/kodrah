@@ -3,7 +3,6 @@ const CONTACT = { telegram: "https://t.me/omix777" };
 
 // ============ ROADMAPS DATA ============
 const roadmaps = [
-  /* ============ 1. مبانی برنامه‌نویسی ============ */
   {
     slug: "programming-basics",
     title: "مبانی برنامه‌نویسی",
@@ -27,8 +26,6 @@ const roadmaps = [
       }
     ]
   },
-
-  /* ============ 2. برنامه‌نویسی وب ============ */
   {
     slug: "web",
     title: "برنامه‌نویسی وب",
@@ -100,8 +97,6 @@ const roadmaps = [
       }
     ]
   },
-
-  /* ============ 3. شبکه ============ */
   {
     slug: "network",
     title: "شبکه",
@@ -149,8 +144,6 @@ const roadmaps = [
       }
     ]
   },
-
-  /* ============ 4. امنیت ============ */
   {
     slug: "security",
     title: "امنیت",
