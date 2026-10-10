@@ -48,8 +48,11 @@
 <link rel="shortcut icon" href="/logo.ico">
 <link rel="apple-touch-icon" href="/logo.png">
 
-<!-- Fonts -->
+<!-- Preconnect -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://t.me">
+
+<!-- Fonts -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 
 <!-- Styles -->
@@ -75,7 +78,7 @@
 <!-- Preloader -->
 <div class="preloader" id="preloader">
   <div class="preloader-inner">
-    <img src="/logo.svg" alt="کدراه" class="preloader-logo-img">
+    <img src="/logo.svg" alt="کدراه" class="preloader-logo-img" loading="eager" width="130" height="130">
     <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
   </div>
 </div>
@@ -107,6 +110,17 @@
 
 <!-- Main -->
 <main id="app"></main>
+
+<!-- NoScript fallback -->
+<noscript>
+  <div class="container" style="padding:80px 20px;text-align:center;">
+    <h2>JavaScript غیرفعال است</h2>
+    <p style="margin-top:12px;color:var(--text-soft)">برای مشاهده کامل سایت، لطفاً JavaScript را در مرورگر خود فعال کنید.</p>
+    <p style="margin-top:20px">
+      <a href="https://t.me/omix777" style="color:#ec4899">تماس در تلگرام</a>
+    </p>
+  </div>
+</noscript>
 
 <!-- Footer -->
 <footer class="site-footer">
