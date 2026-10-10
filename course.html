@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دوره | کدراه</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">کدراه</a>
+      <nav class="nav">
+        <a href="index.html">خانه</a>
+        <a href="roadmaps.html" class="active">نقشه راه‌ها</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="course-root"></main>
+
+  <!-- مودال خرید -->
+  <div class="modal-overlay" id="buy-modal">
+    <div class="modal">
+      <h3>خرید دوره</h3>
+      <p class="modal-sub">روش سفارش خود را انتخاب کنید</p>
+      <div class="platform-options">
+        <button class="platform-btn" onclick="orderVia('telegram')">
+          <span class="platform-icon">✈️</span>
+          <span class="platform-name">تلگرام</span>
+          <span class="platform-hint">@OMIX777</span>
+        </button>
+        <button class="platform-btn" onclick="orderVia('rubika')">
+          <span class="platform-icon">📱</span>
+          <span class="platform-name">روبیکا</span>
+          <span class="platform-hint">@OMIX777</span>
+        </button>
+      </div>
+      <button class="modal-close" onclick="closeBuyModal()">انصراف</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">ساخته شده با ❤️ | کدراه © ۱۴۰۴</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
