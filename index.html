@@ -1,59 +1,138 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>کدراه | مسیرت رو پیدا کن</title>
-  <meta name="description" content="کدراه یک پلتفرم آموزشی برای شروع برنامه‌نویسی و امنیت است. هر مسیر، دوره اختصاصی خودش را دارد.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- SEO -->
+<title>کدراه | نقشه راه برنامه‌نویسی از صفر تا پیشرفته</title>
+<meta name="description" content="کدراه (کد راه) پلتفرم آموزشی برنامه‌نویسی؛ نقشه راه‌های کامل وب، شبکه و امنیت با دوره‌های اختصاصی. از کجا شروع کنم؟ مسیرت رو اینجا پیدا کن.">
+<meta name="keywords" content="کدراه, کد راه, kodrah, برنامه نویسی, نقشه راه برنامه نویسی, آموزش برنامه نویسی, فرانت اند, بک اند, امنیت شبکه, رد تیم, بلو تیم">
+<meta name="author" content="کدراه">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#a78bfa">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://kodrah.ir/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="کدراه">
+<meta property="og:title" content="کدراه | نقشه راه برنامه‌نویسی از صفر تا پیشرفته">
+<meta property="og:description" content="هر مسیر یادگیری، دوره اختصاصی خودش رو داره. نقشه راهت رو انتخاب کن و قدم‌به‌قدم پیش برو.">
+<meta property="og:url" content="https://kodrah.ir/">
+<meta property="og:locale" content="fa_IR">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="کدراه | نقشه راه برنامه‌نویسی">
+<meta name="twitter:description" content="از کجا شروع کنم؟ کدراه جواب می‌ده.">
+
+<!-- Favicon (SVG inline) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='52' font-weight='800' text-anchor='middle' fill='white' font-family='Arial'%3E&lt;/&gt;%3C/text%3E%3C/svg%3E">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "کدراه",
+  "alternateName": "Kodrah",
+  "url": "https://kodrah.ir/",
+  "description": "پلتفرم آموزشی برای یادگیری برنامه‌نویسی، شبکه و امنیت با نقشه راه‌های اختصاصی.",
+  "inLanguage": "fa-IR",
+  "sameAs": [
+    "https://t.me/omix777"
+  ]
+}
+</script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a href="index.html" class="logo">کدراه</a>
-      <nav class="nav">
-        <a href="index.html" class="active">خانه</a>
-        <a href="roadmaps.html">نقشه راه‌ها</a>
-      </nav>
+
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">کدراه</div>
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- Ambient background -->
+<div class="ambient" aria-hidden="true">
+  <span class="orb o1"></span>
+  <span class="orb o2"></span>
+  <span class="orb o3"></span>
+  <span class="orb o4"></span>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="nav-pill">
+    <a href="#/home" class="logo" onclick="navigate('home'); return false;">کدراه</a>
+    <nav class="nav" aria-label="منوی اصلی">
+      <a data-nav="home" onclick="navigate('home')">خانه</a>
+      <a data-nav="roadmaps" onclick="navigate('roadmaps')">نقشه راه‌ها</a>
+      <button class="theme-toggle" aria-label="تغییر تم روشن و تاریک" onclick="toggleTheme()" type="button">
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main id="app"></main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <p>ساخته شده با ❤️ | کدراه © ۱۴۰۵</p>
+  </div>
+</footer>
+
+<!-- Buy Modal -->
+<div class="modal-overlay" id="buy-modal" role="dialog" aria-modal="true" aria-labelledby="buy-title">
+  <div class="modal">
+    <h3 id="buy-title">خرید دوره</h3>
+    <p class="modal-sub">سفارش خود را از طریق تلگرام ثبت کنید</p>
+
+    <button class="platform-btn" onclick="orderVia()" type="button">
+      <span class="platform-icon" aria-hidden="true">✈️</span>
+      <span class="platform-name">ارسال به تلگرام</span>
+      <span class="platform-hint">@OMIX777</span>
+    </button>
+
+    <button class="copy-btn" onclick="copyOrderText()" type="button">
+      📋 فقط کپی متن سفارش
+    </button>
+
+    <div class="vpn-note">
+      <span class="vpn-icon" aria-hidden="true">🌐</span>
+      <p>اگر تلگرام باز نشد یا پیام ارسال نشد، لطفاً <strong>VPN خود را روشن کنید</strong> و دوباره تلاش کنید. در غیر این صورت از دکمه «کپی متن سفارش» استفاده کنید و متن را دستی ارسال کنید.</p>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>مسیرت رو در دنیای <span class="grad">برنامه‌نویسی</span> پیدا کن</h1>
-        <p>
-          نمی‌دونی از کجا شروع کنی؟ اینجا هر مسیر یادگیری، دوره اختصاصی خودش رو داره.
-          نقشه راهت رو انتخاب کن و قدم‌به‌قدم پیش برو.
-        </p>
-        <a href="roadmaps.html" class="btn btn-primary">🚀 مشاهده نقشه راه‌ها</a>
-      </div>
-    </section>
+    <div class="copy-note">
+      <span class="copy-note-icon" aria-hidden="true">📋</span>
+      <p>
+        متن سفارش <strong>به‌صورت خودکار در کلیپ‌بورد شما کپی می‌شود</strong>.
+        لطفاً متن کپی‌شده را <strong>بدون هیچ تغییری</strong> برای آیدی
+        <strong>@OMIX777</strong> ارسال کنید.
+      </p>
+    </div>
 
-    <section class="container">
-      <div class="features">
-        <div class="feature">
-          <div class="icon">🧭</div>
-          <h3>مسیر شفاف</h3>
-          <p>هر نقشه راه نشون می‌ده از کجا شروع کنی و به کجا برسی.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">📚</div>
-          <h3>دوره‌های اختصاصی</h3>
-          <p>هر مسیر، دوره‌های مخصوص خودش رو داره؛ از مقدماتی تا پیشرفته.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">🎯</div>
-          <h3>بدون سردرگمی</h3>
-          <p>دیگه لازم نیست بپرسی «از کجا شروع کنم؟»؛ همه چیز آماده‌ست.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+    <button class="modal-close" onclick="closeBuyModal()" type="button">انصراف</button>
+  </div>
+</div>
 
-  <footer class="site-footer">
-    <div class="container">ساخته شده با ❤️ | کدراه © ۱۴۰۴</div>
-  </footer>
+<!-- Scripts -->
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
