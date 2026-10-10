@@ -1,41 +1,64 @@
+// ============ CONFIG ============
+const SITE_URL = 'https://kodrah.ir';
+
 // ============ THEME ============
 (function initTheme() {
-  const saved = localStorage.getItem('kodrah-theme');
-  document.documentElement.setAttribute('data-theme', saved || 'light');
+  try {
+    const saved = localStorage.getItem('kodrah-theme');
+    document.documentElement.setAttribute('data-theme', saved || 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+  updateThemeButton();
 })();
 
 function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('kodrah-theme', next);
+  try { localStorage.setItem('kodrah-theme', next); } catch (e) {}
+  updateThemeButton();
 }
 
-// ============ SEO HELPERS ============
+function updateThemeButton() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const theme = document.documentElement.getAttribute('data-theme');
+  btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+}
+
+// ============ SEO ============
 const DEFAULT_TITLE = 'کدراه | نقشه راه برنامه‌نویسی از صفر تا پیشرفته';
 const DEFAULT_DESC = 'کدراه (کد راه) پلتفرم آموزشی برنامه‌نویسی؛ نقشه راه‌های کامل وب، شبکه و امنیت با دوره‌های اختصاصی.';
-const SITE_URL = 'https://kodrah.ir/';
 
-function setSEO(title, description, path = '/') {
+function setMetaByName(name, content) {
+  let el = document.querySelector('meta[name="' + name + '"]');
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('name', name);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function setMetaByProperty(prop, content) {
+  let el = document.querySelector('meta[property="' + prop + '"]');
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute('property', prop);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function setSEO(title, description, path) {
   document.title = title;
-
-  const setMeta = (selector, attr, value) => {
-    let el = document.querySelector(selector);
-    if (!el) {
-      el = document.createElement('meta');
-      const [key, val] = selector.replace(/meta\[|\]/g, '').split('=');
-      el.setAttribute(key, val.replace(/['"]/g, ''));
-      document.head.appendChild(el);
-    }
-    el.setAttribute(attr, value);
-  };
-
-  setMeta('meta[name="description"]', 'content', description);
-  setMeta('meta[property="og:title"]', 'content', title);
-  setMeta('meta[property="og:description"]', 'content', description);
-  setMeta('meta[property="og:url"]', 'content', SITE_URL + '#' + path);
-  setMeta('meta[name="twitter:title"]', 'content', title);
-  setMeta('meta[name="twitter:description"]', 'content', description);
+  setMetaByName('description', description);
+  setMetaByProperty('og:title', title);
+  setMetaByProperty('og:description', description);
+  setMetaByProperty('og:url', SITE_URL + path);
+  setMetaByName('twitter:title', title);
+  setMetaByName('twitter:description', description);
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
@@ -43,21 +66,37 @@ function setSEO(title, description, path = '/') {
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  canonical.setAttribute('href', SITE_URL + '#' + path);
+  canonical.setAttribute('href', SITE_URL + path);
+}
+
+// ============ HELPERS ============
+function escapeAttr(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
 // ============ RENDER ============
 const app = document.getElementById('app');
 
 function renderHome() {
-  setSEO(DEFAULT_TITLE, DEFAULT_DESC, '/home');
+  setSEO(DEFAULT_TITLE, DEFAULT_DESC, '/');
   app.innerHTML = `
     <section class="hero">
       <div class="container">
         <div class="badge-top">پلتفرم آموزشی کدراه</div>
         <h1>مسیرت رو در دنیای <span class="grad">برنامه‌نویسی</span> پیدا کن</h1>
         <p>نمی‌دونی از کجا شروع کنی؟ اینجا هر مسیر یادگیری، دوره اختصاصی خودش رو داره. نقشه راهت رو انتخاب کن و قدم‌به‌قدم پیش برو.</p>
-        <a class="btn btn-primary" onclick="navigate('roadmaps')">🚀 مشاهده نقشه راه‌ها</a>
+        <a href="/roadmaps" data-link class="btn btn-primary">🚀 مشاهده نقشه راه‌ها</a>
       </div>
     </section>
     <section class="container">
@@ -86,10 +125,10 @@ function renderRoadmaps() {
           ${roadmaps.map(r => {
             const totalCourses = r.sections.reduce((s, sec) => s + sec.courses.length, 0);
             return `
-              <a class="card" onclick="navigate('roadmap', {r:'${r.slug}'})">
+              <a class="card" href="/roadmaps/${escapeAttr(r.slug)}" data-link>
                 <div class="card-icon">${r.icon}</div>
-                <h3>${r.title}</h3>
-                <p>${r.description}</p>
+                <h3>${escapeHtml(r.title)}</h3>
+                <p>${escapeHtml(r.description)}</p>
                 <div class="card-meta">
                   <span>${r.sections.length} بخش • ${totalCourses} دوره</span>
                   <span class="arrow">مشاهده مسیر ←</span>
@@ -105,12 +144,12 @@ function renderRoadmaps() {
 
 function renderRoadmap(slug) {
   const roadmap = roadmaps.find(r => r.slug === slug);
-  if (!roadmap) { renderNotFound(); return; }
+  if (!roadmap) return renderNotFound();
 
   setSEO(
-    `${roadmap.title} | نقشه راه کدراه`,
-    `نقشه راه ${roadmap.title} در کدراه: ${roadmap.description}`,
-    `/roadmap?r=${slug}`
+    roadmap.title + ' | نقشه راه کدراه',
+    'نقشه راه ' + roadmap.title + ' در کدراه: ' + roadmap.description,
+    '/roadmaps/' + slug
   );
 
   const prereqHtml = roadmap.prerequisite ? `
@@ -118,7 +157,9 @@ function renderRoadmap(slug) {
       <span class="prereq-icon">⚠️</span>
       <div>
         <strong>پیش‌نیاز</strong>
-        <p>${roadmap.prerequisite.text} <a onclick="navigate('roadmap', {r:'${roadmap.prerequisite.link}'})">${roadmap.prerequisite.linkText}</a></p>
+        <p>${escapeHtml(roadmap.prerequisite.text)}
+          <a href="/roadmaps/${escapeAttr(roadmap.prerequisite.link)}" data-link>${escapeHtml(roadmap.prerequisite.linkText)}</a>
+        </p>
       </div>
     </div>
   ` : '';
@@ -126,30 +167,30 @@ function renderRoadmap(slug) {
   app.innerHTML = `
     <div class="container">
       <div class="breadcrumb">
-        <a onclick="navigate('home')">خانه</a>
+        <a href="/" data-link>خانه</a>
         <span class="sep">/</span>
-        <a onclick="navigate('roadmaps')">نقشه راه‌ها</a>
+        <a href="/roadmaps" data-link>نقشه راه‌ها</a>
         <span class="sep">/</span>
-        <span>${roadmap.title}</span>
+        <span>${escapeHtml(roadmap.title)}</span>
       </div>
       <div class="page-header" style="text-align:right;padding:10px 0 26px">
-        <h1>${roadmap.icon} ${roadmap.title}</h1>
-        <p>${roadmap.description}</p>
+        <h1>${roadmap.icon} ${escapeHtml(roadmap.title)}</h1>
+        <p>${escapeHtml(roadmap.description)}</p>
       </div>
       ${prereqHtml}
       <div style="display:flex;flex-direction:column;gap:16px;padding-bottom:60px">
         ${roadmap.sections.map((sec, i) => `
-          <div class="section-card" onclick="navigate('section', {r:'${roadmap.slug}', s:'${sec.slug}'})">
+          <a class="section-card" href="/roadmaps/${escapeAttr(roadmap.slug)}/${escapeAttr(sec.slug)}" data-link>
             <div class="sc-num">${i + 1}</div>
             <div class="sc-content">
-              <h3>${sec.title}</h3>
+              <h3>${escapeHtml(sec.title)}</h3>
               <div class="sc-meta">
                 <span class="badge">${sec.courses.length} دوره</span>
-                <span>شروع از ${sec.courses[0]?.title || ''}</span>
+                <span>شروع از ${escapeHtml(sec.courses[0]?.title || '')}</span>
               </div>
             </div>
             <div class="sc-arrow">←</div>
-          </div>
+          </a>
         `).join('')}
       </div>
     </div>
@@ -159,41 +200,41 @@ function renderRoadmap(slug) {
 function renderSection(rSlug, sSlug) {
   const roadmap = roadmaps.find(r => r.slug === rSlug);
   const section = roadmap?.sections.find(s => s.slug === sSlug);
-  if (!roadmap || !section) { renderNotFound(); return; }
+  if (!roadmap || !section) return renderNotFound();
 
   setSEO(
-    `${section.title} - ${roadmap.title} | کدراه`,
-    `${section.courses.length} دوره در بخش ${section.title} از مسیر ${roadmap.title}.`,
-    `/section?r=${rSlug}&s=${sSlug}`
+    section.title + ' - ' + roadmap.title + ' | کدراه',
+    section.courses.length + ' دوره در بخش ' + section.title + ' از مسیر ' + roadmap.title + '.',
+    '/roadmaps/' + rSlug + '/' + sSlug
   );
 
   app.innerHTML = `
     <div class="container">
       <div class="breadcrumb">
-        <a onclick="navigate('home')">خانه</a>
+        <a href="/" data-link>خانه</a>
         <span class="sep">/</span>
-        <a onclick="navigate('roadmaps')">نقشه راه‌ها</a>
+        <a href="/roadmaps" data-link>نقشه راه‌ها</a>
         <span class="sep">/</span>
-        <a onclick="navigate('roadmap', {r:'${roadmap.slug}'})">${roadmap.title}</a>
+        <a href="/roadmaps/${escapeAttr(roadmap.slug)}" data-link>${escapeHtml(roadmap.title)}</a>
         <span class="sep">/</span>
-        <span>${section.title}</span>
+        <span>${escapeHtml(section.title)}</span>
       </div>
       <div class="page-header" style="text-align:right;padding:10px 0 26px">
-        <h1>${section.title}</h1>
+        <h1>${escapeHtml(section.title)}</h1>
         <p>${section.courses.length} دوره در این بخش</p>
       </div>
       <div style="padding-bottom:60px">
         ${section.courses.map(c => `
           <div class="course-card">
             <div>
-              <h4>${c.title}</h4>
+              <h4>${escapeHtml(c.title)}</h4>
               <div class="meta">
-                <span class="badge">${c.level}</span>
-                <span>⏱ ${c.duration}</span>
-                <span>💰 ${c.price}</span>
+                <span class="badge">${escapeHtml(c.level)}</span>
+                <span>⏱ ${escapeHtml(c.duration)}</span>
+                <span>💰 ${escapeHtml(c.price)}</span>
               </div>
             </div>
-            <button class="btn btn-primary btn-sm" onclick="navigate('course', {r:'${roadmap.slug}', s:'${section.slug}', c:'${c.slug}'})">مشاهده دوره</button>
+            <a href="/roadmaps/${escapeAttr(roadmap.slug)}/${escapeAttr(section.slug)}/${escapeAttr(c.slug)}" data-link class="btn btn-primary btn-sm">مشاهده دوره</a>
           </div>
         `).join('')}
       </div>
@@ -205,12 +246,12 @@ function renderCourse(rSlug, sSlug, cSlug) {
   const roadmap = roadmaps.find(r => r.slug === rSlug);
   const section = roadmap?.sections.find(s => s.slug === sSlug);
   const course = section?.courses.find(c => c.slug === cSlug);
-  if (!roadmap || !section || !course) { renderNotFound(); return; }
+  if (!roadmap || !section || !course) return renderNotFound();
 
   setSEO(
-    `${course.title} | دوره ${roadmap.title} | کدراه`,
-    `${course.description.slice(0, 150)}`,
-    `/course?r=${rSlug}&s=${sSlug}&c=${cSlug}`
+    course.title + ' | دوره ' + roadmap.title + ' | کدراه',
+    course.description.slice(0, 155),
+    '/roadmaps/' + rSlug + '/' + sSlug + '/' + cSlug
   );
 
   injectCourseSchema(course);
@@ -218,34 +259,34 @@ function renderCourse(rSlug, sSlug, cSlug) {
   app.innerHTML = `
     <div class="container">
       <div class="breadcrumb">
-        <a onclick="navigate('home')">خانه</a>
+        <a href="/" data-link>خانه</a>
         <span class="sep">/</span>
-        <a onclick="navigate('roadmaps')">نقشه راه‌ها</a>
+        <a href="/roadmaps" data-link>نقشه راه‌ها</a>
         <span class="sep">/</span>
-        <a onclick="navigate('roadmap', {r:'${roadmap.slug}'})">${roadmap.title}</a>
+        <a href="/roadmaps/${escapeAttr(roadmap.slug)}" data-link>${escapeHtml(roadmap.title)}</a>
         <span class="sep">/</span>
-        <a onclick="navigate('section', {r:'${roadmap.slug}', s:'${section.slug}'})">${section.title}</a>
+        <a href="/roadmaps/${escapeAttr(roadmap.slug)}/${escapeAttr(section.slug)}" data-link>${escapeHtml(section.title)}</a>
         <span class="sep">/</span>
-        <span>${course.title}</span>
+        <span>${escapeHtml(course.title)}</span>
       </div>
       <div class="course-detail">
         <div class="course-main">
-          <h1>${course.title}</h1>
+          <h1>${escapeHtml(course.title)}</h1>
           <div style="margin-bottom:22px;display:flex;gap:10px;flex-wrap:wrap">
-            <span class="badge">${course.level}</span>
-            <span class="badge badge-green">${section.title}</span>
+            <span class="badge">${escapeHtml(course.level)}</span>
+            <span class="badge badge-green">${escapeHtml(section.title)}</span>
           </div>
-          <p>${course.description}</p>
+          <p>${escapeHtml(course.description)}</p>
           <h2>سرفصل‌ها</h2>
-          <ul>${course.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+          <ul>${course.topics.map(t => '<li>' + escapeHtml(t) + '</li>').join('')}</ul>
         </div>
         <aside class="course-side">
-          <div class="price">${course.price}</div>
+          <div class="price">${escapeHtml(course.price)}</div>
           <div class="price-sub">دسترسی دائمی + پشتیبانی</div>
-          <button class="btn btn-primary" onclick="openBuyModal('${course.title.replace(/'/g, "\\'")}', '${course.price.replace(/'/g, "\\'")}')">🛒 خرید دوره</button>
+          <button class="btn btn-primary" type="button" data-buy data-course="${escapeAttr(course.title)}" data-price="${escapeAttr(course.price)}">🛒 خرید دوره</button>
           <hr>
-          <div class="info-row"><span>سطح</span><span>${course.level}</span></div>
-          <div class="info-row"><span>مدت</span><span>${course.duration}</span></div>
+          <div class="info-row"><span>سطح</span><span>${escapeHtml(course.level)}</span></div>
+          <div class="info-row"><span>مدت</span><span>${escapeHtml(course.duration)}</span></div>
           <div class="info-row"><span>فرمت</span><span>ویدیو + تمرین</span></div>
         </aside>
       </div>
@@ -287,40 +328,84 @@ function renderNotFound() {
       <div class="empty">
         <h2>پیدا نشد</h2>
         <p>آدرس موردنظر وجود ندارد.</p>
-        <button class="btn btn-primary" style="margin-top:20px" onclick="navigate('home')">بازگشت به خانه</button>
+        <a href="/" data-link class="btn btn-primary" style="margin-top:20px">بازگشت به خانه</a>
       </div>
     </div>
   `;
 }
 
 // ============ ROUTER ============
-function navigate(route, params = {}) {
-  const query = new URLSearchParams(params).toString();
-  location.hash = query ? `#/${route}?${query}` : `#/${route}`;
+function navigate(path, replace) {
+  if (path === location.pathname + location.search) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    return;
+  }
+  if (replace) {
+    history.replaceState(null, null, path);
+  } else {
+    history.pushState(null, null, path);
+  }
+  router();
 }
 
 function router() {
-  const hash = location.hash || '#/home';
-  const [path, query] = hash.slice(2).split('?');
-  const params = Object.fromEntries(new URLSearchParams(query || ''));
+  const path = location.pathname.replace(/\/+$/, '') || '/';
+  const parts = path.split('/').filter(Boolean);
 
-  document.querySelectorAll('.nav a').forEach(a => {
-    const isRoadmapsArea = ['roadmap', 'section', 'course', 'roadmaps'].includes(path);
-    a.classList.toggle('active', a.dataset.nav === path || (isRoadmapsArea && a.dataset.nav === 'roadmaps'));
+  // update nav active state
+  document.querySelectorAll('.nav a[data-nav]').forEach(a => {
+    const nav = a.dataset.nav;
+    let isActive = false;
+    if (nav === 'home') isActive = parts.length === 0;
+    else if (nav === 'roadmaps') isActive = parts[0] === 'roadmaps';
+    a.classList.toggle('active', isActive);
   });
 
   window.scrollTo({ top: 0, behavior: 'instant' });
 
-  if (path === 'home' || path === '') renderHome();
-  else if (path === 'roadmaps') renderRoadmaps();
-  else if (path === 'roadmap') renderRoadmap(params.r);
-  else if (path === 'section') renderSection(params.r, params.s);
-  else if (path === 'course') renderCourse(params.r, params.s, params.c);
-  else renderNotFound();
+  try {
+    if (parts.length === 0) {
+      renderHome();
+    } else if (parts[0] === 'roadmaps') {
+      if (parts.length === 1) renderRoadmaps();
+      else if (parts.length === 2) renderRoadmap(parts[1]);
+      else if (parts.length === 3) renderSection(parts[1], parts[2]);
+      else if (parts.length === 4) renderCourse(parts[1], parts[2], parts[3]);
+      else renderNotFound();
+    } else {
+      renderNotFound();
+    }
+  } catch (err) {
+    console.error('Router error:', err);
+    renderNotFound();
+  }
 }
-window.addEventListener('hashchange', router);
 
-// ============ MODAL (داینامیک) ============
+// ============ LINK INTERCEPTION ============
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[data-link]');
+  if (link) {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('/') && !href.startsWith('//')) {
+      e.preventDefault();
+      navigate(href);
+    }
+    return;
+  }
+
+  const buyBtn = e.target.closest('[data-buy]');
+  if (buyBtn) {
+    openBuyModal(buyBtn.dataset.course, buyBtn.dataset.price);
+    return;
+  }
+
+  const action = e.target.closest('[data-action]')?.dataset.action;
+  if (action === 'order') orderVia();
+  else if (action === 'copy') copyOrderText();
+  else if (action === 'close') closeBuyModal();
+});
+
+// ============ MODAL ============
 function openBuyModal(courseTitle, coursePrice) {
   const old = document.getElementById('buy-modal');
   if (old) old.remove();
@@ -330,20 +415,21 @@ function openBuyModal(courseTitle, coursePrice) {
   modal.id = 'buy-modal';
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
-  modal.dataset.course = courseTitle;
-  modal.dataset.price = coursePrice;
+  modal.setAttribute('aria-labelledby', 'buy-modal-title');
+  modal.dataset.course = courseTitle || '';
+  modal.dataset.price = coursePrice || '';
   modal.innerHTML = `
     <div class="modal">
-      <h3>خرید دوره</h3>
+      <h3 id="buy-modal-title">خرید دوره</h3>
       <p class="modal-sub">سفارش خود را از طریق تلگرام ثبت کنید</p>
 
-      <button class="platform-btn" onclick="orderVia()" type="button">
+      <button class="platform-btn" type="button" data-action="order">
         <span class="platform-icon" aria-hidden="true">✈️</span>
         <span class="platform-name">ارسال به تلگرام</span>
         <span class="platform-hint">@OMIX777</span>
       </button>
 
-      <button class="copy-btn" onclick="copyOrderText()" type="button">
+      <button class="copy-btn" type="button" data-action="copy">
         📋 فقط کپی متن سفارش
       </button>
 
@@ -362,16 +448,18 @@ function openBuyModal(courseTitle, coursePrice) {
         </p>
       </div>
 
-      <button class="modal-close" onclick="closeBuyModal()" type="button">انصراف</button>
+      <button class="modal-close" type="button" data-action="close">انصراف</button>
     </div>
   `;
 
   document.body.appendChild(modal);
   requestAnimationFrame(() => modal.classList.add('active'));
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeBuyModal();
-  });
+  // Focus on first actionable
+  setTimeout(() => {
+    const first = modal.querySelector('.platform-btn');
+    if (first) first.focus();
+  }, 120);
 }
 
 function closeBuyModal() {
@@ -386,26 +474,31 @@ function buildOrderMessage() {
   const title = modal?.dataset.course || '';
   const price = modal?.dataset.price || '';
   if (price.includes('رایگان')) {
-    return `سلام. میخوام دوره «${title}» رو دریافت کنم.`;
+    return 'سلام. میخوام دوره «' + title + '» رو دریافت کنم.';
   }
-  return `سلام. میخوام دوره «${title}» رو با مبلغ ${price} خریداری کنم.`;
+  return 'سلام. میخوام دوره «' + title + '» رو با مبلغ ' + price + ' خریداری کنم.';
 }
 
 function copyOrderText() {
   const msg = buildOrderMessage();
-  navigator.clipboard.writeText(msg)
-    .then(() => showToast('✅ متن سفارش کپی شد — دستی برای @OMIX777 بفرستید'))
-    .catch(() => showToast('متن سفارش آماده شد.'));
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msg)
+      .then(() => showToast('✅ متن سفارش کپی شد — دستی برای @OMIX777 بفرستید'))
+      .catch(() => showToast('متن سفارش آماده شد.'));
+  } else {
+    showToast('مرورگر شما از کپی خودکار پشتیبانی نمی‌کند.');
+  }
 }
 
 function orderVia() {
   const msg = buildOrderMessage();
   const encoded = encodeURIComponent(msg);
-  const url = `${CONTACT.telegram}?text=${encoded}`;
+  const url = (typeof CONTACT !== 'undefined' ? CONTACT.telegram : 'https://t.me/omix777') + '?text=' + encoded;
 
-  navigator.clipboard.writeText(msg).catch(() => {});
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msg).catch(() => {});
+  }
   showToast('✅ متن آماده شد — در حال باز کردن تلگرام...');
-
   setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 400);
 }
 
@@ -416,6 +509,8 @@ function showToast(text) {
     t = document.createElement('div');
     t.id = 'toast';
     t.className = 'toast';
+    t.setAttribute('role', 'status');
+    t.setAttribute('aria-live', 'polite');
     t.innerHTML = '<span class="dot"></span><span id="toast-text"></span>';
     document.body.appendChild(t);
   }
@@ -425,15 +520,18 @@ function showToast(text) {
   t._timer = setTimeout(() => t.classList.remove('show'), 3200);
 }
 
-// ============ EVENTS ============
+// ============ KEYBOARD ============
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeBuyModal();
 });
 
+// ============ POPSTATE ============
+window.addEventListener('popstate', router);
+
 // ============ PRELOADER ============
 (function initPreloader() {
   document.body.classList.add('loading');
-  const MIN_DURATION = 1800;
+  const MIN_DURATION = 1500;
   const startTime = Date.now();
 
   function hideLoader() {
@@ -441,13 +539,17 @@ document.addEventListener('keydown', (e) => {
     if (!loader || loader.classList.contains('hide')) return;
     loader.classList.add('hide');
     document.body.classList.remove('loading');
-    setTimeout(() => loader.remove(), 800);
+    setTimeout(() => { if (loader.parentNode) loader.remove(); }, 700);
   }
 
-  window.addEventListener('load', () => {
-    const elapsed = Date.now() - startTime;
-    setTimeout(hideLoader, Math.max(0, MIN_DURATION - elapsed));
-  });
+  if (document.readyState === 'complete') {
+    setTimeout(hideLoader, Math.max(0, MIN_DURATION - (Date.now() - startTime)));
+  } else {
+    window.addEventListener('load', () => {
+      const elapsed = Date.now() - startTime;
+      setTimeout(hideLoader, Math.max(0, MIN_DURATION - elapsed));
+    });
+  }
   setTimeout(hideLoader, 3000);
 })();
 
