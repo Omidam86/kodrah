@@ -1,5 +1,6 @@
 // ============ CONFIG ============
 const SITE_URL = 'https://kodrah.ir';
+const FALLBACK_OG_IMAGE = 'https://kodrah.ir/logo.png';
 
 // ============ THEME ============
 (function initTheme() {
@@ -51,14 +52,17 @@ function setMetaByProperty(prop, content) {
   el.setAttribute('content', content);
 }
 
-function setSEO(title, description, path) {
+function setSEO(title, description, path, image) {
   document.title = title;
+  const ogImage = image || FALLBACK_OG_IMAGE;
   setMetaByName('description', description);
   setMetaByProperty('og:title', title);
   setMetaByProperty('og:description', description);
   setMetaByProperty('og:url', SITE_URL + path);
+  setMetaByProperty('og:image', ogImage);
   setMetaByName('twitter:title', title);
   setMetaByName('twitter:description', description);
+  setMetaByName('twitter:image', ogImage);
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
@@ -71,7 +75,7 @@ function setSEO(title, description, path) {
 
 // ============ HELPERS ============
 function escapeAttr(str) {
-  return String(str)
+  return String(str == null ? '' : str)
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/</g, '&lt;')
@@ -79,14 +83,32 @@ function escapeAttr(str) {
 }
 
 function escapeHtml(str) {
-  return String(str)
+  return String(str == null ? '' : str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
 
+// ============ DATA CHECK ============
+function isDataReady() {
+  return typeof roadmaps !== 'undefined' && Array.isArray(roadmaps) && roadmaps.length > 0;
+}
+
 // ============ RENDER ============
 const app = document.getElementById('app');
+
+function renderDataError() {
+  document.title = 'خطا | کدراه';
+  app.innerHTML = `
+    <div class="container">
+      <div class="empty">
+        <h2>مشکلی پیش آمد</h2>
+        <p>داده‌های سایت بارگذاری نشد. لطفاً صفحه را دوباره باز کنید.</p>
+        <button class="btn btn-primary" style="margin-top:20px" onclick="location.reload()">بارگذاری مجدد</button>
+      </div>
+    </div>
+  `;
+}
 
 function renderHome() {
   setSEO(DEFAULT_TITLE, DEFAULT_DESC, '/');
@@ -352,7 +374,6 @@ function router() {
   const path = location.pathname.replace(/\/+$/, '') || '/';
   const parts = path.split('/').filter(Boolean);
 
-  // update nav active state
   document.querySelectorAll('.nav a[data-nav]').forEach(a => {
     const nav = a.dataset.nav;
     let isActive = false;
@@ -362,6 +383,13 @@ function router() {
   });
 
   window.scrollTo({ top: 0, behavior: 'instant' });
+
+  // Data check
+  if (!isDataReady()) {
+    console.error('Roadmaps data not loaded');
+    renderDataError();
+    return;
+  }
 
   try {
     if (parts.length === 0) {
@@ -377,7 +405,7 @@ function router() {
     }
   } catch (err) {
     console.error('Router error:', err);
-    renderNotFound();
+    renderDataError();
   }
 }
 
@@ -455,7 +483,6 @@ function openBuyModal(courseTitle, coursePrice) {
   document.body.appendChild(modal);
   requestAnimationFrame(() => modal.classList.add('active'));
 
-  // Focus on first actionable
   setTimeout(() => {
     const first = modal.querySelector('.platform-btn');
     if (first) first.focus();
@@ -531,7 +558,7 @@ window.addEventListener('popstate', router);
 // ============ PRELOADER ============
 (function initPreloader() {
   document.body.classList.add('loading');
-  const MIN_DURATION = 1500;
+  const MIN_DURATION = 800; // کاهش از 1500 به 800
   const startTime = Date.now();
 
   function hideLoader() {
@@ -550,7 +577,7 @@ window.addEventListener('popstate', router);
       setTimeout(hideLoader, Math.max(0, MIN_DURATION - elapsed));
     });
   }
-  setTimeout(hideLoader, 3000);
+  setTimeout(hideLoader, 2500);
 })();
 
 // ============ INIT ============
