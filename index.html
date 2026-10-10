@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+<!-- Restore path (before any other script) -->
+<script>
+(function () {
+  try {
+    var saved = sessionStorage.getItem('kodrah_path');
+    if (saved) {
+      sessionStorage.removeItem('kodrah_path');
+      history.replaceState(null, null, saved);
+    }
+  } catch (e) {}
+})();
+</script>
+
 <!-- SEO -->
 <title>کدراه | نقشه راه برنامه‌نویسی از صفر تا پیشرفته</title>
 <meta name="description" content="کدراه (کد راه) پلتفرم آموزشی برنامه‌نویسی؛ نقشه راه‌های کامل وب، شبکه و امنیت با دوره‌های اختصاصی. از کجا شروع کنم؟ مسیرت رو اینجا پیدا کن.">
@@ -31,16 +44,16 @@
 <meta name="twitter:image" content="https://kodrah.ir/logo.png">
 
 <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="logo.ico">
-<link rel="shortcut icon" href="logo.ico">
-<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" type="image/x-icon" href="/logo.ico">
+<link rel="shortcut icon" href="/logo.ico">
+<link rel="apple-touch-icon" href="/logo.png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="/style.css?v=5">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
@@ -62,7 +75,7 @@
 <!-- Preloader -->
 <div class="preloader" id="preloader">
   <div class="preloader-inner">
-    <img src="logo.svg" alt="کدراه" class="preloader-logo-img">
+    <img src="/logo.svg" alt="کدراه" class="preloader-logo-img">
     <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
   </div>
 </div>
@@ -78,13 +91,13 @@
 <!-- Header -->
 <header class="site-header">
   <div class="nav-pill">
-    <a href="#/home" class="logo" onclick="navigate('home'); return false;">
+    <a href="/" class="logo" data-link aria-label="خانه کدراه">
       <span class="logo-text">کدراه</span>
     </a>
     <nav class="nav" aria-label="منوی اصلی">
-      <a data-nav="home" onclick="navigate('home')">خانه</a>
-      <a data-nav="roadmaps" onclick="navigate('roadmaps')">نقشه راه‌ها</a>
-      <button class="theme-toggle" aria-label="تغییر تم" onclick="toggleTheme()" type="button">
+      <a href="/" data-link data-nav="home">خانه</a>
+      <a href="/roadmaps" data-link data-nav="roadmaps">نقشه راه‌ها</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="تغییر تم روشن و تاریک" aria-pressed="false" type="button">
         <span class="icon-sun" aria-hidden="true">☀️</span>
         <span class="icon-moon" aria-hidden="true">🌙</span>
       </button>
@@ -101,12 +114,12 @@
     <p>
       ساخته شده با ❤️ | کدراه © ۱۴۰۵
       &nbsp;•&nbsp;
-      <a href="sitemap.html" style="color: var(--text-soft); text-decoration: underline;">نقشه سایت</a>
+      <a href="/sitemap.html" style="color: var(--text-soft); text-decoration: underline;">نقشه سایت</a>
     </p>
   </div>
 </footer>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="/data.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>
