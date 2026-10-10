@@ -1,4 +1,4 @@
-/* ============ ROOT ============ */
+/* ============ THEME VARS ============ */
 :root {
   --r-sm: 8px;
   --r-md: 12px;
@@ -7,31 +7,6 @@
   --r-pill: 999px;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --font: 'Vazirmatn', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-}
-
-html[data-theme="dark"] {
-  --bg: #0a0a0c;
-  --bg-2: #131316;
-  --bg-3: #1a1a1f;
-  --bg-hover: #1f1f25;
-  --text: #f5f5f7;
-  --text-2: #a1a1a6;
-  --text-3: #6e6e73;
-  --border: rgba(255,255,255,0.08);
-  --border-2: rgba(255,255,255,0.14);
-  --accent: #8b5cf6;
-  --accent-2: #a78bfa;
-  --accent-soft: rgba(139,92,246,0.14);
-  --accent-text: #c4b5fd;
-  --nav-bg: rgba(10,10,12,0.72);
-  --overlay: rgba(0,0,0,0.7);
-  --warn-bg: rgba(255,159,10,0.1);
-  --warn-text: #ffb340;
-  --warn-border: rgba(255,159,10,0.25);
-  --vpn-bg: rgba(59,130,246,0.1);
-  --vpn-text: #93c5fd;
-  --vpn-border: rgba(59,130,246,0.25);
-  --shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
 html[data-theme="light"] {
@@ -59,6 +34,31 @@ html[data-theme="light"] {
   --shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
+html[data-theme="dark"] {
+  --bg: #0a0a0c;
+  --bg-2: #131316;
+  --bg-3: #1a1a1f;
+  --bg-hover: #1f1f25;
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #6e6e73;
+  --border: rgba(255,255,255,0.08);
+  --border-2: rgba(255,255,255,0.14);
+  --accent: #8b5cf6;
+  --accent-2: #a78bfa;
+  --accent-soft: rgba(139,92,246,0.14);
+  --accent-text: #c4b5fd;
+  --nav-bg: rgba(10,10,12,0.72);
+  --overlay: rgba(0,0,0,0.7);
+  --warn-bg: rgba(255,159,10,0.1);
+  --warn-text: #ffb340;
+  --warn-border: rgba(255,159,10,0.25);
+  --vpn-bg: rgba(59,130,246,0.1);
+  --vpn-text: #93c5fd;
+  --vpn-border: rgba(59,130,246,0.25);
+  --shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
 /* ============ RESET ============ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -76,12 +76,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  width: 100%;
-  max-width: 100%;
   overflow-x: hidden;
 }
 html::-webkit-scrollbar,
 body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+* { scrollbar-width: none; }
 
 body {
   font-family: var(--font);
@@ -96,12 +95,12 @@ body {
   padding-top: 58px;
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
-  width: 100%;
-  max-width: 100%;
   overflow-x: hidden;
 }
-body.loading { overflow: hidden; }
+body.loading {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
 
 a { color: inherit; text-decoration: none; cursor: pointer; }
 
@@ -176,7 +175,6 @@ img, svg { max-width: 100%; display: block; height: auto; }
   justify-content: space-between;
   height: 100%;
   padding: 0 14px;
-  max-width: 1120px;
 }
 
 .logo { display: flex; align-items: center; flex-shrink: 0; }
@@ -194,7 +192,6 @@ img, svg { max-width: 100%; display: block; height: auto; }
   display: flex;
   gap: 0;
   align-items: center;
-  flex-wrap: nowrap;
   flex-shrink: 1;
   min-width: 0;
 }
@@ -247,7 +244,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
   transition: all 0.2s var(--ease);
   white-space: nowrap;
   letter-spacing: -0.01em;
-  text-align: center;
 }
 .btn-primary {
   color: #fff;
@@ -472,8 +468,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
   letter-spacing: -0.02em;
   margin-bottom: 2px;
   color: var(--text);
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .section-card .sc-meta {
   color: var(--text-3);
@@ -896,27 +890,19 @@ html[data-theme="light"] .badge-green { color: #16a34a; }
 }
 
 /* ============================================
-   TABLET — 640px and up
+   TABLET — 640px+
    ============================================ */
 @media (min-width: 640px) {
   body { font-size: 16px; padding-top: 62px; }
-
   .site-header { height: 62px; }
   .site-header .container { padding: 0 24px; }
   .logo-text { font-size: 1.12rem; }
 
-  .nav a {
-    padding: 8px 13px;
-    font-size: 0.86rem;
-  }
-  .theme-toggle {
-    width: 36px; height: 36px;
-    margin-right: 4px;
-  }
+  .nav a { padding: 8px 13px; font-size: 0.86rem; }
+  .theme-toggle { width: 36px; height: 36px; margin-right: 4px; }
   .theme-toggle svg { width: 17px; height: 17px; }
 
   .container { padding: 0 24px; }
-
   .btn { padding: 12px 22px; font-size: 0.94rem; }
 
   .hero { padding: 70px 0 60px; }
@@ -939,7 +925,6 @@ html[data-theme="light"] .badge-green { color: #16a34a; }
   .page-header p { font-size: 0.96rem; }
 
   .section { padding: 16px 0 70px; }
-
   .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
   .card { padding: 24px; }
@@ -975,23 +960,16 @@ html[data-theme="light"] .badge-green { color: #16a34a; }
 }
 
 /* ============================================
-   DESKTOP — 860px and up
+   DESKTOP — 860px+
    ============================================ */
 @media (min-width: 860px) {
   body { padding-top: 68px; }
-
   .site-header { height: 68px; }
   .site-header .container { padding: 0 32px; }
   .logo-text { font-size: 1.2rem; }
 
-  .nav a {
-    padding: 9px 15px;
-    font-size: 0.9rem;
-  }
-  .theme-toggle {
-    width: 38px; height: 38px;
-    margin-right: 6px;
-  }
+  .nav a { padding: 9px 15px; font-size: 0.9rem; }
+  .theme-toggle { width: 38px; height: 38px; margin-right: 6px; }
   .theme-toggle svg { width: 18px; height: 18px; }
 
   .container { padding: 0 32px; }
@@ -1032,7 +1010,7 @@ html[data-theme="light"] .badge-green { color: #16a34a; }
 }
 
 /* ============================================
-   LARGE — 1024px and up
+   LARGE — 1024px+
    ============================================ */
 @media (min-width: 1024px) {
   .grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
