@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://kodrah.ir/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://kodrah.ir/#/roadmaps</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://kodrah.ir/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/programming-basics</loc><priority>0.8</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web</loc><priority>0.8</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network</loc><priority>0.8</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security</loc><priority>0.8</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/programming-basics/start</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/basics</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/backend</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/fullstack</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/basics</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/cisco</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/microsoft</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/linux</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/basics</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/red-team</loc><priority>0.7</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/blue-team</loc><priority>0.7</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/programming-basics/start/intro-to-programming</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/programming-basics/start/logic-thinking</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/programming-basics/start/git-github</loc><priority>0.6</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/web/basics/web-fundamentals</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/basics/web-paths</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend/html-css</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend/js-basics</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend/js-advanced</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend/react</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/frontend/tailwind</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/backend/node-js</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/backend/python-backend</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/backend/databases</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/backend/rest-api</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/fullstack/next-js</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/web/fullstack/mern-stack</loc><priority>0.6</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/network/basics/intro-to-network</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/basics/network-paths</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/cisco/ccna</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/microsoft/windows-server</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/network/linux/linux-network</loc><priority>0.6</priority></url>
+
+  <url><loc>https://kodrah.ir/roadmaps/security/basics/intro-to-security</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/basics/security-paths</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/red-team/pentest</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/red-team/web-pentest</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/blue-team/soc</loc><priority>0.6</priority></url>
+  <url><loc>https://kodrah.ir/roadmaps/security/blue-team/digital-forensics</loc><priority>0.6</priority></url>
+
+  <url><loc>https://kodrah.ir/sitemap.html</loc><priority>0.3</priority></url>
 </urlset>
