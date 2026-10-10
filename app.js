@@ -213,7 +213,7 @@ function renderCourse(rSlug, sSlug, cSlug) {
     `/course?r=${rSlug}&s=${sSlug}&c=${cSlug}`
   );
 
-  injectCourseSchema(course, section, roadmap);
+  injectCourseSchema(course);
 
   app.innerHTML = `
     <div class="container">
@@ -253,7 +253,7 @@ function renderCourse(rSlug, sSlug, cSlug) {
   `;
 }
 
-function injectCourseSchema(course, section, roadmap) {
+function injectCourseSchema(course) {
   const old = document.getElementById('course-schema');
   if (old) old.remove();
 
@@ -320,13 +320,11 @@ function router() {
 }
 window.addEventListener('hashchange', router);
 
-// ============ MODAL (ساخت داینامیک) ============
+// ============ MODAL (داینامیک) ============
 function openBuyModal(courseTitle, coursePrice) {
-  // حذف مودال قبلی اگه وجود داره
   const old = document.getElementById('buy-modal');
   if (old) old.remove();
 
-  // ساخت مودال به صورت داینامیک
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.id = 'buy-modal';
@@ -369,11 +367,8 @@ function openBuyModal(courseTitle, coursePrice) {
   `;
 
   document.body.appendChild(modal);
-
-  // انیمیشن باز شدن
   requestAnimationFrame(() => modal.classList.add('active'));
 
-  // بستن با کلیک روی پس‌زمینه
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeBuyModal();
   });
