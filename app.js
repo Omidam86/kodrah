@@ -1,6 +1,5 @@
 const CONTACT = {
-  telegram: "https://t.me/OMIX777",
-  rubika: "https://rubika.ir/OMIX777"
+  telegram: "https://t.me/omix777"
 };
 
 function getParam(name) {
@@ -47,7 +46,10 @@ function renderRoadmapPage() {
     return;
   }
 
-  document.title = `${roadmap.title} | کدراه`;
+  document.title = `${roadmap.title} | نقشه راه کدراه`;
+  document.querySelector('meta[name="description"]')?.setAttribute(
+    'content', `نقشه راه ${roadmap.title} در کدراه: ${roadmap.description}`
+  );
 
   root.innerHTML = `
     <div class="breadcrumb">
@@ -96,7 +98,10 @@ function renderCoursePage() {
     return;
   }
 
-  document.title = `${course.title} | کدراه`;
+  document.title = `${course.title} | کدراه - ${roadmap.title}`;
+  document.querySelector('meta[name="description"]')?.setAttribute(
+    'content', `${course.title} در مسیر ${roadmap.title} - ${course.description.slice(0, 120)}`
+  );
 
   root.innerHTML = `
     <div class="breadcrumb">
@@ -153,11 +158,10 @@ function orderVia(platform) {
   const msg = `سلام\nمن درخواست خرید دوره «${course}» را دارم.`;
 
   navigator.clipboard.writeText(msg)
-    .then(() => showToast('متن سفارش کپی شد. در چت پیست کنید.'))
+    .then(() => showToast('✅ متن در کلیپ‌بورد کپی شد — در چت پیست کنید'))
     .catch(() => showToast('متن سفارش آماده شد.'));
 
-  const url = platform === 'telegram' ? CONTACT.telegram : CONTACT.rubika;
-  setTimeout(() => window.open(url, '_blank'), 400);
+  setTimeout(() => window.open(CONTACT.telegram, '_blank'), 400);
 }
 
 function showToast(text) {
