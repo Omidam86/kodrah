@@ -37,7 +37,6 @@ function setSEO(title, description, path = '/') {
   setMeta('meta[name="twitter:title"]', 'content', title);
   setMeta('meta[name="twitter:description"]', 'content', description);
 
-  // Canonical
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
     canonical = document.createElement('link');
@@ -214,7 +213,6 @@ function renderCourse(rSlug, sSlug, cSlug) {
     `/course?r=${rSlug}&s=${sSlug}&c=${cSlug}`
   );
 
-  // Structured Data برای دوره
   injectCourseSchema(course, section, roadmap);
 
   app.innerHTML = `
@@ -329,6 +327,7 @@ function openBuyModal(courseTitle, coursePrice) {
   modal.dataset.price = coursePrice;
   modal.classList.add('active');
 }
+
 function closeBuyModal() {
   document.getElementById('buy-modal').classList.remove('active');
 }
@@ -351,8 +350,16 @@ function copyOrderText() {
 }
 
 function orderVia() {
-  copyOrderText();
-  setTimeout(() => window.open(CONTACT.telegram, '_blank'), 500);
+  const msg = buildOrderMessage();
+  const encoded = encodeURIComponent(msg);
+  const url = `${CONTACT.telegram}?text=${encoded}`;
+
+  // کپی در کلیپ‌بورد به عنوان پشتیبان (اگه تلگرام متن رو پر نکرد)
+  navigator.clipboard.writeText(msg).catch(() => {});
+
+  showToast('✅ متن آماده شد — در حال باز کردن تلگرام...');
+
+  setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 400);
 }
 
 // ============ TOAST ============
