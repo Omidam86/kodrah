@@ -87,10 +87,19 @@ button { font-family: inherit; }
 .nav-pill::before { content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px; background: linear-gradient(90deg, transparent, var(--glass-top-light), transparent); }
 
 /* LOGO */
-.logo { display: flex; align-items: center; gap: 10px; cursor: pointer; position: relative; z-index: 1; text-decoration: none; }
-.logo-mark { width: 42px; height: 42px; object-fit: contain; flex-shrink: 0; transition: transform 0.5s var(--spring); filter: drop-shadow(0 4px 12px rgba(236, 72, 153, 0.3)); }
-.logo:hover .logo-mark { transform: rotate(-6deg) scale(1.08); }
-.logo-text { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #ec4899, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.logo { display: flex; align-items: center; cursor: pointer; position: relative; z-index: 1; text-decoration: none; }
+.logo-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ec4899, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.4s var(--spring);
+  display: inline-block;
+}
+.logo:hover .logo-text { transform: scale(1.05); }
 
 .nav { display: flex; gap: 6px; align-items: center; position: relative; z-index: 1; }
 .nav a { color: var(--text-soft); padding: 9px 18px; border-radius: 999px; font-weight: 500; font-size: 0.9rem; transition: all 0.4s var(--spring); border: 1px solid transparent; }
@@ -246,9 +255,6 @@ html[data-theme="dark"] .copy-note strong { color: var(--accent-3); }
 /* FOOTER */
 .site-footer { margin-top: auto; padding: 40px 0; color: var(--text-mute); text-align: center; font-size: 0.88rem; position: relative; }
 .site-footer::before { content: ''; position: absolute; top: 0; left: 30%; right: 30%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-strong), transparent); }
-.footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; }
-.footer-logo { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(236,72,153,0.25)); }
-.footer-brand span { font-weight: 800; font-size: 1.1rem; background: linear-gradient(135deg, #ec4899, #22d3ee); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .empty { text-align: center; padding: 80px 20px; color: var(--text-soft); }
 .empty h2 { color: var(--text); margin-bottom: 12px; font-size: 1.5rem; }
@@ -261,12 +267,10 @@ html[data-theme="dark"] .copy-note strong { color: var(--accent-3); }
   body { padding-top: 88px; }
   .container { padding: 0 18px; }
   .nav-pill { padding: 0 14px; height: 60px; border-radius: 24px; }
-  .logo-mark { width: 36px; height: 36px; }
-  .logo-text { font-size: 1rem; }
+  .logo-text { font-size: 1.15rem; }
   .nav a { padding: 7px 12px; font-size: 0.82rem; }
   .theme-toggle { width: 36px; height: 36px; font-size: 1rem; }
   .preloader-logo-img { width: 100px; height: 100px; }
-  .footer-logo { width: 36px; height: 36px; }
   .hero { padding: 50px 0 60px; }
   .features { padding: 20px 0 60px; }
   .course-card { grid-template-columns: 1fr; padding: 20px; }
