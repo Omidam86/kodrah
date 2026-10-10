@@ -9,14 +9,13 @@ function applyTheme(theme) {
 }
 
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
   applyTheme(current === 'dark' ? 'light' : 'dark');
 }
 
 function bindThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
-  // remove any previous listener by cloning
   const fresh = btn.cloneNode(true);
   btn.parentNode.replaceChild(fresh, btn);
   fresh.addEventListener('click', function (e) {
@@ -511,13 +510,21 @@ window.addEventListener('popstate', router);
   document.body.classList.add('loading');
   const MIN = 700;
   const start = Date.now();
+  let done = false;
 
   function hide() {
+    if (done) return;
+    done = true;
+
     const loader = document.getElementById('preloader');
-    if (!loader || loader.classList.contains('hide')) return;
-    loader.classList.add('hide');
+    if (loader) {
+      loader.classList.add('hide');
+      setTimeout(() => { if (loader.parentNode) loader.remove(); }, 600);
+    }
+
     document.body.classList.remove('loading');
-    setTimeout(() => loader.remove(), 600);
+    document.body.style.overflow = '';
+    document.body.style.height = '';
   }
 
   if (document.readyState === 'complete') {
@@ -527,7 +534,9 @@ window.addEventListener('popstate', router);
       setTimeout(hide, Math.max(0, MIN - (Date.now() - start)));
     });
   }
-  setTimeout(hide, 2200);
+
+  // Fallback قطعی — هر اتفاقی افتاد بعد از ۲ ثانیه اسکرول آزاد می‌شه
+  setTimeout(hide, 2000);
 })();
 
 // ============ INIT ============
