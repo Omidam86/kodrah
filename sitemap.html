@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نقشه سایت | کدراه - تمام مسیرها و دوره‌ها</title>
-<meta name="description" content="نقشه کامل سایت کدراه: تمام نقشه راه‌های برنامه‌نویسی، وب، شبکه و امنیت با لیست کامل دوره‌ها.">
+<title>نقشه سایت | کدراه - تمام مسیرها، تمرین‌ها و دوره‌ها</title>
+<meta name="description" content="نقشه کامل سایت کدراه: تمام نقشه راه‌های برنامه‌نویسی، تمرین‌های پایتون، وب، شبکه و امنیت با لیست کامل دوره‌ها.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://kodrah.ir/sitemap.html">
-<link rel="icon" type="image/x-icon" href="/logo.ico">
-<link rel="shortcut icon" href="/logo.ico">
-<link rel="apple-touch-icon" href="/logo.png">
+<link rel="icon" type="image/png" href="/logo.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <script type="application/ld+json">
 {
@@ -28,36 +26,31 @@
 }
 html[data-theme="light"] {
   --bg: #f4f5f9; --text: #0d0e12; --text-soft: rgba(13,14,18,0.72); --text-mute: rgba(13,14,18,0.52);
-  --card-bg: #ffffff;
-  --card-border: rgba(13,14,18,0.08);
-  --card-border-strong: rgba(13,14,18,0.14);
-  --card-shadow: 0 8px 24px -14px rgba(31,41,55,0.15);
+  --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.45) 60%, rgba(255,255,255,0.6));
+  --glass-bg-strong: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.65));
+  --glass-border: rgba(255,255,255,0.9); --glass-border-strong: rgba(255,255,255,1);
+  --glass-top-light: rgba(255,255,255,0.95);
+  --glass-shadow: 0 20px 50px -20px rgba(31,41,55,0.18);
   --border-soft: rgba(13,14,18,0.06);
   --orb-1: #ec4899; --orb-2: #22d3ee; --orb-opacity: 0.35; --orb-blur: 130px;
 }
 html[data-theme="dark"] {
   --bg: #030305; --text: #ffffff; --text-soft: rgba(255,255,255,0.72); --text-mute: rgba(255,255,255,0.48);
-  --card-bg: #0f1219;
-  --card-border: rgba(255,255,255,0.08);
-  --card-border-strong: rgba(255,255,255,0.16);
-  --card-shadow: 0 8px 24px -14px rgba(0,0,0,0.7);
+  --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.05));
+  --glass-bg-strong: linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.05));
+  --glass-border: rgba(255,255,255,0.11); --glass-border-strong: rgba(255,255,255,0.18);
+  --glass-top-light: rgba(255,255,255,0.22);
+  --glass-shadow: 0 20px 50px -20px rgba(0,0,0,0.7);
   --border-soft: rgba(255,255,255,0.06);
   --orb-1: #ec4899; --orb-2: #06b6d4; --orb-opacity: 0.5; --orb-blur: 110px;
 }
-* {
-  box-sizing: border-box; margin: 0; padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-*::-webkit-scrollbar { display: none; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
   font-family: 'Vazirmatn', system-ui, sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.8;
   min-height: 100vh; overflow-x: hidden; padding: 40px 20px;
-  transition: background 0.4s var(--ease), color 0.4s var(--ease);
-  -webkit-overflow-scrolling: touch;
+  transition: background 0.5s var(--ease), color 0.5s var(--ease);
 }
 .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .orb { position: absolute; border-radius: 50%; filter: blur(var(--orb-blur)); }
@@ -67,18 +60,18 @@ body {
 .back-link {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 20px; margin-bottom: 30px;
-  background: var(--card-bg); border: 1px solid var(--card-border);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
   border-radius: 999px; color: var(--text-soft);
   text-decoration: none; font-size: 0.9rem; font-weight: 600;
-  transition: all 0.3s var(--spring);
+  backdrop-filter: blur(20px); transition: all 0.4s var(--spring);
 }
-.back-link:hover { color: var(--text); transform: translateX(-4px); border-color: var(--card-border-strong); }
+.back-link:hover { color: var(--text); transform: translateX(-4px); }
 header.page-head {
   padding: 30px 32px; margin-bottom: 30px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 28px;
-  box-shadow: var(--card-shadow);
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 28px; backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: inset 0 1px 0 var(--glass-top-light), var(--glass-shadow);
   text-align: center;
 }
 header.page-head h1 {
@@ -88,43 +81,41 @@ header.page-head h1 {
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 header.page-head p { color: var(--text-soft); font-size: 1rem; }
-.roadmap-block {
+.section-block {
   padding: 28px; margin-bottom: 22px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 24px;
-  box-shadow: var(--card-shadow);
-  transition: border-color 0.3s;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px; backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: inset 0 1px 0 var(--glass-top-light), var(--glass-shadow);
 }
-.roadmap-block:hover { border-color: var(--card-border-strong); }
-.roadmap-block h2 {
+.section-block h2 {
   font-size: 1.3rem; font-weight: 800; margin-bottom: 18px;
   display: flex; align-items: center; gap: 10px;
   padding-bottom: 14px; border-bottom: 1px solid var(--border-soft);
 }
-.roadmap-block h2 a { color: inherit; text-decoration: none; transition: color 0.3s; }
-.roadmap-block h2 a:hover { color: #ec4899; }
-.section-group { margin-bottom: 20px; padding-right: 14px; border-right: 3px solid rgba(236,72,153,0.4); }
-.section-group:last-child { margin-bottom: 0; }
-.section-group h3 {
+.section-block h2 a { color: inherit; text-decoration: none; transition: color 0.3s; }
+.section-block h2 a:hover { color: #ec4899; }
+.section-block h2 .icon { font-size: 1.4rem; }
+.group { margin-bottom: 20px; padding-right: 14px; border-right: 3px solid rgba(236,72,153,0.4); }
+.group h3 {
   font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;
   color: var(--text); display: flex; align-items: center; gap: 8px;
 }
-.section-group h3 a { color: inherit; text-decoration: none; transition: color 0.3s; }
-.section-group h3 a:hover { color: #ec4899; }
-.section-group ul { list-style: none; padding-right: 4px; }
-.section-group li { margin-bottom: 8px; padding-right: 18px; position: relative; }
-.section-group li::before {
+.group h3 a { color: inherit; text-decoration: none; transition: color 0.3s; }
+.group h3 a:hover { color: #ec4899; }
+.group ul { list-style: none; padding-right: 4px; }
+.group li { margin-bottom: 8px; padding-right: 18px; position: relative; }
+.group li::before {
   content: ''; position: absolute; right: 0; top: 12px;
   width: 6px; height: 6px; border-radius: 50%;
   background: linear-gradient(135deg, #ec4899, #22d3ee);
 }
-.section-group li a {
+.group li a {
   color: var(--text-soft); text-decoration: none; font-size: 0.94rem;
   transition: color 0.3s, padding 0.3s;
 }
-.section-group li a:hover { color: #ec4899; padding-right: 4px; }
-.section-group li .price-tag { color: var(--text-mute); font-size: 0.82rem; margin-right: 6px; }
+.group li a:hover { color: #ec4899; padding-right: 4px; }
+.group li .price-tag { color: var(--text-mute); font-size: 0.82rem; margin-right: 6px; }
 footer.page-foot {
   text-align: center; padding: 30px 0 20px;
   color: var(--text-mute); font-size: 0.88rem;
@@ -132,9 +123,9 @@ footer.page-foot {
 @media (max-width: 640px) {
   body { padding: 20px 14px; }
   header.page-head { padding: 24px 20px; }
-  .roadmap-block { padding: 22px 18px; }
-  .roadmap-block h2 { font-size: 1.1rem; }
-  .section-group h3 { font-size: 0.98rem; }
+  .section-block { padding: 22px 18px; }
+  .section-block h2 { font-size: 1.1rem; }
+  .group h3 { font-size: 0.98rem; }
 }
 </style>
 </head>
@@ -142,11 +133,11 @@ footer.page-foot {
 <div class="ambient"><span class="orb o1"></span><span class="orb o2"></span></div>
 
 <div class="container">
-  <a href="/" class="back-link">← بازگشت به سایت</a>
+  <a href="https://kodrah.ir/" class="back-link">← بازگشت به سایت</a>
 
   <header class="page-head">
     <h1>نقشه کامل سایت کدراه</h1>
-    <p>لیست تمام نقشه راه‌ها، بخش‌ها و دوره‌های آموزشی</p>
+    <p>لیست تمام نقشه راه‌ها، تمرین‌های پایتون و دوره‌های آموزشی</p>
   </header>
 
   <main id="sitemap-content"></main>
@@ -157,57 +148,93 @@ footer.page-foot {
 </div>
 
 <script src="/data.js"></script>
+<script src="/python/data.js"></script>
 <script>
 (function renderSitemap() {
   const container = document.getElementById('sitemap-content');
-  if (typeof roadmaps === 'undefined') {
-    container.innerHTML = '<p style="text-align:center;color:var(--text-mute)">داده‌ها بارگذاری نشد.</p>';
-    return;
+  const blocks = [];
+
+  /* ============ تمرین‌های پایتون ============ */
+  if (typeof pythonExercises !== 'undefined' && Array.isArray(pythonExercises)) {
+    const levels = ['مقدماتی', 'متوسط', 'پیشرفته'];
+    let pythonHtml = `
+      <div class="section-block">
+        <h2>
+          <span class="icon">🐍</span>
+          <a href="https://kodrah.ir/python/">تمرین‌های پایتون (${pythonExercises.length} تمرین)</a>
+        </h2>
+    `;
+
+    levels.forEach(level => {
+      const list = pythonExercises.filter(e => e.level === level);
+      if (list.length === 0) return;
+
+      pythonHtml += `
+        <div class="group">
+          <h3>سطح ${level} (${list.length} تمرین)</h3>
+          <ul>
+            ${list.map(ex => `
+              <li>
+                <a href="https://kodrah.ir/python/exercise.html?slug=${encodeURIComponent(ex.slug)}">
+                  ${ex.title}
+                </a>
+                <span class="price-tag">— ${ex.category}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `;
+    });
+
+    pythonHtml += `</div>`;
+    blocks.push(pythonHtml);
   }
 
-  container.innerHTML = roadmaps.map(r => {
-    const sectionsHtml = r.sections.map(sec => `
-      <div class="section-group">
-        <h3>
-          <a href="/roadmaps/${r.slug}/${sec.slug}">
-            ${sec.title} (${sec.courses.length} دوره)
-          </a>
-        </h3>
-        <ul>
-          ${sec.courses.map(c => `
-            <li>
-              <a href="/roadmaps/${r.slug}/${sec.slug}/${c.slug}">
-                ${c.title}
-              </a>
-              <span class="price-tag">— ${c.price}</span>
-            </li>
-          `).join('')}
-        </ul>
-      </div>
-    `).join('');
+  /* ============ نقشه راه‌ها ============ */
+  if (typeof roadmaps !== 'undefined' && Array.isArray(roadmaps)) {
+    roadmaps.forEach(r => {
+      const sectionsHtml = r.sections.map(sec => `
+        <div class="group">
+          <h3>
+            <a href="https://kodrah.ir/roadmaps/${r.slug}/${sec.slug}">
+              ${sec.title} (${sec.courses.length} دوره)
+            </a>
+          </h3>
+          <ul>
+            ${sec.courses.map(c => `
+              <li>
+                <a href="https://kodrah.ir/roadmaps/${r.slug}/${sec.slug}/${c.slug}">
+                  ${c.title}
+                </a>
+                <span class="price-tag">— ${c.price}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
 
-    const totalCourses = r.sections.reduce((s, sec) => s + sec.courses.length, 0);
+      const totalCourses = r.sections.reduce((s, sec) => s + sec.courses.length, 0);
 
-    return `
-      <div class="roadmap-block">
-        <h2>
-          <a href="/roadmaps/${r.slug}">
-            ${r.icon} ${r.title} (${totalCourses} دوره)
-          </a>
-        </h2>
-        ${sectionsHtml}
-      </div>
-    `;
-  }).join('');
+      blocks.push(`
+        <div class="section-block">
+          <h2>
+            <span class="icon">${r.icon}</span>
+            <a href="https://kodrah.ir/roadmaps/${r.slug}">
+              ${r.title} (${totalCourses} دوره)
+            </a>
+          </h2>
+          ${sectionsHtml}
+        </div>
+      `);
+    });
+  }
+
+  container.innerHTML = blocks.join('');
 })();
 
 (function initTheme() {
-  try {
-    const saved = localStorage.getItem('kodrah-theme');
-    document.documentElement.setAttribute('data-theme', saved || 'light');
-  } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
+  const saved = localStorage.getItem('kodrah-theme');
+  document.documentElement.setAttribute('data-theme', saved || 'light');
 })();
 </script>
 </body>
