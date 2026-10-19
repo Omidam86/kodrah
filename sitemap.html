@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نقشه سایت | کدراه - تمام مسیرها، تمرین‌ها و دوره‌ها</title>
-<meta name="description" content="نقشه کامل سایت کدراه: تمام نقشه راه‌های برنامه‌نویسی، تمرین‌های پایتون، وب، شبکه و امنیت با لیست کامل دوره‌ها.">
+<meta name="description" content="نقشه کامل سایت کدراه: تمام نقشه راه‌های برنامه‌نویسی، تمرین‌های پایتون، فرصت همکاری در تولید محتوا، وب، شبکه و امنیت با لیست کامل دوره‌ها.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://kodrah.ir/sitemap.html">
 <link rel="icon" type="image/png" href="/logo.png">
@@ -88,6 +88,10 @@ header.page-head p { color: var(--text-soft); font-size: 1rem; }
   border-radius: 24px; backdrop-filter: blur(30px) saturate(180%);
   box-shadow: inset 0 1px 0 var(--glass-top-light), var(--glass-shadow);
 }
+.section-block.highlight {
+  border: 1px solid rgba(236,72,153,0.35);
+  background: linear-gradient(135deg, rgba(236,72,153,0.08), rgba(34,211,238,0.05));
+}
 .section-block h2 {
   font-size: 1.3rem; font-weight: 800; margin-bottom: 18px;
   display: flex; align-items: center; gap: 10px;
@@ -96,7 +100,20 @@ header.page-head p { color: var(--text-soft); font-size: 1rem; }
 .section-block h2 a { color: inherit; text-decoration: none; transition: color 0.3s; }
 .section-block h2 a:hover { color: #ec4899; }
 .section-block h2 .icon { font-size: 1.4rem; }
+.section-block p.block-desc {
+  color: var(--text-soft); font-size: 0.92rem; line-height: 1.85;
+  margin-bottom: 14px;
+}
+.section-block .block-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 999px;
+  background: linear-gradient(135deg, #ec4899, #22d3ee);
+  color: #fff; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.section-block .block-cta:hover { opacity: 0.85; }
 .group { margin-bottom: 20px; padding-right: 14px; border-right: 3px solid rgba(236,72,153,0.4); }
+.group:last-child { margin-bottom: 0; }
 .group h3 {
   font-size: 1.05rem; font-weight: 700; margin-bottom: 12px;
   color: var(--text); display: flex; align-items: center; gap: 8px;
@@ -120,6 +137,8 @@ footer.page-foot {
   text-align: center; padding: 30px 0 20px;
   color: var(--text-mute); font-size: 0.88rem;
 }
+footer.page-foot a { color: var(--text-soft); text-decoration: none; margin: 0 4px; transition: color 0.2s; }
+footer.page-foot a:hover { color: #ec4899; }
 @media (max-width: 640px) {
   body { padding: 20px 14px; }
   header.page-head { padding: 24px 20px; }
@@ -137,13 +156,16 @@ footer.page-foot {
 
   <header class="page-head">
     <h1>نقشه کامل سایت کدراه</h1>
-    <p>لیست تمام نقشه راه‌ها، تمرین‌های پایتون و دوره‌های آموزشی</p>
+    <p>لیست تمام نقشه راه‌ها، تمرین‌های پایتون، فرصت همکاری و دوره‌های آموزشی</p>
   </header>
 
   <main id="sitemap-content"></main>
 
   <footer class="page-foot">
-    ساخته شده با ❤️ | کدراه © ۱۴۰۵
+    کدراه © ۱۴۰۵ —
+    <a href="https://kodrah.ir/">صفحه اصلی</a> •
+    <a href="https://kodrah.ir/python/">تمرین پایتون</a> •
+    <a href="https://kodrah.ir/collab/">همکاری</a>
   </footer>
 </div>
 
@@ -153,6 +175,22 @@ footer.page-foot {
 (function renderSitemap() {
   const container = document.getElementById('sitemap-content');
   const blocks = [];
+
+  /* ============ همکاری در تولید محتوا (ویژه) ============ */
+  blocks.push(`
+    <div class="section-block highlight">
+      <h2>
+        <span class="icon">🤝</span>
+        <a href="https://kodrah.ir/collab/">همکاری در تولید محتوا</a>
+      </h2>
+      <p class="block-desc">
+        اگر در زمینه آموزش برنامه‌نویسی فعالیت می‌کنید و دوره ویدیویی یا کتاب آموزشی
+        تولید کرده‌اید، با کدراه همکاری کنید. بدون هیچ هزینه‌ای، محتوای شما در پلتفرم
+        کدراه عرضه و فروخته می‌شود.
+      </p>
+      <a href="https://kodrah.ir/collab/" class="block-cta">درخواست همکاری →</a>
+    </div>
+  `);
 
   /* ============ تمرین‌های پایتون ============ */
   if (typeof pythonExercises !== 'undefined' && Array.isArray(pythonExercises)) {
