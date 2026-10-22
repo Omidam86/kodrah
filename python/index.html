@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- ============ SEO ============ -->
+<title>تمرین و پروژه پایتون | از مقدماتی تا پیشرفته | کدراه</title>
+<meta name="description" content="تمرین و پروژه پایتون از مقدماتی تا پیشرفته به همراه صورت مسئله، ورودی و خروجی نمونه و راه‌حل کامل.">
+<meta name="keywords" content="تمرین پایتون, پروژه پایتون, آموزش پایتون, تمرین برنامه نویسی, پایتون مقدماتی, پایتون پیشرفته, کدراه, kodrah">
+<meta name="author" content="کدراه">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#003049">
+<link rel="canonical" href="https://kodrah.ir/python/">
+
+<!-- ============ Open Graph ============ -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="کدراه">
+<meta property="og:title" content="تمرین و پروژه پایتون | کدراه">
+<meta property="og:description" content="تمرین پایتون از مقدماتی تا پیشرفته با راه‌حل کامل.">
+<meta property="og:url" content="https://kodrah.ir/python/">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:image" content="https://kodrah.ir/favicon-96x96.png">
+
+<!-- ============ Twitter ============ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="تمرین پایتون | کدراه">
+<meta name="twitter:description" content="از مقدماتی تا پیشرفته با راه‌حل کامل.">
+<meta name="twitter:image" content="https://kodrah.ir/favicon-96x96.png">
+
+<!-- ============ Favicons ============ -->
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="کدراه">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- ============ Performance ============ -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<!-- ============ Fonts & Styles ============ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="/style.css?v=18">
+<link rel="stylesheet" href="/python/style.css?v=1">
+
+<!-- ============ Structured Data ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "تمرین و پروژه پایتون — کدراه",
+  "url": "https://kodrah.ir/python/",
+  "description": "مجموعه تمرین و پروژه پایتون از مقدماتی تا پیشرفته با راه‌حل کامل",
+  "inLanguage": "fa-IR",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "کدراه",
+    "url": "https://kodrah.ir/"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- ============ Preloader ============ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <img src="/logo.svg" alt="کدراه" class="preloader-logo-img" width="48" height="48">
+    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- ============ Header ============ -->
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="logo" aria-label="کدراه — صفحه اصلی">
+      <span class="logo-text">کدراه</span>
+    </a>
+    <nav class="nav" aria-label="منوی اصلی">
+      <a href="/">خانه</a>
+      <a href="/roadmaps">نقشه راه‌ها</a>
+      <a href="/python/" class="active" aria-current="page">تمرین پایتون</a>
+      <a href="/collab/">همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ Main ============ -->
+<main>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>تمرین و پروژه پایتون</h1>
+      <p>از مقدماتی تا پیشرفته — با صورت مسئله، خروجی نمونه و راه‌حل کامل</p>
+    </div>
+  </section>
+
+  <!-- Exercises List -->
+  <section class="section" aria-label="لیست تمرین‌ها">
+    <div class="container">
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" id="filter-bar" role="tablist" aria-label="فیلتر بر اساس سطح">
+        <button class="filter-btn active" data-filter="all" type="button" role="tab" aria-selected="true">همه</button>
+        <button class="filter-btn" data-filter="مقدماتی" type="button" role="tab" aria-selected="false">مقدماتی</button>
+        <button class="filter-btn" data-filter="متوسط" type="button" role="tab" aria-selected="false">متوسط</button>
+        <button class="filter-btn" data-filter="پیشرفته" type="button" role="tab" aria-selected="false">پیشرفته</button>
+      </div>
+
+      <!-- Exercises Grid (rendered by app.js) -->
+      <div class="grid" id="exercises-grid"></div>
+
+      <!-- Empty State -->
+      <div class="empty" id="empty-state" style="display:none">
+        <p>تمرینی در این سطح وجود ندارد.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <p>کدراه © ۱۴۰۵ — <a href="/sitemap.html">نقشه سایت</a> • <a href="/python/">تمرین پایتون</a> • <a href="/collab/">همکاری</a></p>
+  </div>
+</footer>
+
+<!-- ============ Scripts ============ -->
+<script src="/python/data.js"></script>
+<script src="/python/app.js"></script>
+</body>
+</html>
