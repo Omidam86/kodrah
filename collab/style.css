@@ -1,0 +1,421 @@
+/* ============================================
+   COLLAB — Specific Styles
+   (Depends on /style.css for variables & base)
+   ============================================ */
+
+/* ============ Narrow Container ============ */
+.container-narrow {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 640px) {
+  .container-narrow { padding: 0 24px; }
+}
+@media (min-width: 860px) {
+  .container-narrow { padding: 0 32px; }
+}
+
+/* ============ Hero ============ */
+.collab-hero {
+  padding: 50px 0 30px;
+  text-align: center;
+}
+.collab-hero__emoji {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.collab-hero__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+.collab-hero__subtitle {
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.collab-hero__desc {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin: 0 auto 28px;
+  max-width: 560px;
+}
+.collab-hero__cta {
+  font-size: 0.95rem;
+  padding: 13px 28px;
+}
+
+/* ============ Section ============ */
+.collab-section {
+  padding: 30px 0;
+}
+.collab-section__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.collab-section__header h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.collab-section__header p {
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+/* ============ Intro ============ */
+.collab-intro {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  text-align: center;
+}
+.collab-intro p {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+.collab-intro strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ============ Benefits Grid ============ */
+.collab-benefits {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.collab-benefit {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  transition: all 0.25s var(--ease);
+}
+.collab-benefit:hover {
+  border-color: var(--border-2);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.collab-benefit__icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+.collab-benefit h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.collab-benefit p {
+  color: var(--text-2);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* ============ Requirements List ============ */
+.collab-requirements {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.collab-requirement {
+  display: flex;
+  gap: 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 20px;
+  align-items: flex-start;
+}
+.collab-requirement__num {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.collab-requirement__content {
+  flex: 1;
+}
+.collab-requirement__content h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+.collab-requirement__content p {
+  color: var(--text-2);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ============ CTA Block ============ */
+.collab-cta {
+  background: linear-gradient(135deg, var(--accent-soft), var(--bg-2));
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 36px 24px;
+  text-align: center;
+}
+.collab-cta__icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.collab-cta h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.collab-cta p {
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+.collab-cta__btn {
+  font-size: 1rem;
+  padding: 13px 30px;
+}
+
+/* ============ Collab Modal ============ */
+.collab-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 14px;
+}
+.collab-modal-overlay.active {
+  display: flex;
+}
+.collab-modal {
+  max-width: 440px;
+  width: 100%;
+  padding: 22px 18px;
+  border-radius: var(--r-xl);
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  box-shadow: 0 20px 60px rgba(0,48,73,0.3);
+  animation: collabModalIn 0.25s var(--ease);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+@keyframes collabModalIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.collab-modal h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 5px;
+  text-align: center;
+  color: var(--text);
+}
+.collab-modal__sub {
+  color: var(--text-3);
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+}
+.collab-modal__platform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 8px;
+  border-radius: var(--r-lg);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s var(--ease);
+}
+.collab-modal__platform:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.collab-modal__platform:hover .collab-modal__hint {
+  color: rgba(255,255,255,0.85);
+}
+.collab-modal__platform-icon { font-size: 1.3rem; }
+.collab-modal__platform-name { font-size: 0.88rem; }
+.collab-modal__hint {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  font-weight: 500;
+  transition: color 0.2s var(--ease);
+}
+.collab-modal__copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  border-radius: var(--r-lg);
+  background: transparent;
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s var(--ease);
+}
+.collab-modal__copy:hover {
+  color: var(--text);
+  border-color: var(--navy);
+  background: var(--navy-soft);
+}
+.collab-modal__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: var(--r-md);
+  background: var(--vpn-bg);
+  border: 1px solid var(--vpn-border);
+}
+.collab-modal__note p {
+  color: var(--text-2);
+  font-size: 0.74rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.collab-modal__note strong {
+  color: var(--vpn-text);
+  font-weight: 700;
+}
+.collab-modal__note-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+.collab-modal__close {
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  color: var(--text-3);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s var(--ease);
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.collab-modal__close:hover {
+  color: var(--text);
+  background: var(--bg-3);
+}
+
+/* ============ Responsive ============ */
+@media (min-width: 640px) {
+  .collab-hero {
+    padding: 70px 0 40px;
+  }
+  .collab-hero__emoji {
+    font-size: 3.5rem;
+  }
+  .collab-hero__title {
+    font-size: 2.4rem;
+    margin-bottom: 18px;
+  }
+  .collab-hero__subtitle {
+    font-size: 1.15rem;
+  }
+  .collab-hero__desc {
+    font-size: 1.05rem;
+  }
+
+  .collab-section { padding: 40px 0; }
+  .collab-section__header h2 { font-size: 1.6rem; }
+
+  .collab-intro { padding: 30px; }
+  .collab-intro p { font-size: 1rem; }
+
+  .collab-benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .collab-benefit { padding: 26px; }
+
+  .collab-cta { padding: 44px 32px; }
+  .collab-cta h2 { font-size: 1.5rem; }
+
+  .collab-modal { padding: 26px 24px; }
+  .collab-modal h3 { font-size: 1.15rem; }
+}
+
+@media (min-width: 860px) {
+  .collab-hero {
+    padding: 90px 0 50px;
+  }
+  .collab-hero__title {
+    font-size: 2.8rem;
+  }
+  .collab-hero__desc {
+    font-size: 1.1rem;
+  }
+
+  .collab-benefits {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .collab-benefit {
+    padding: 24px 20px;
+  }
+  .collab-benefit h3 { font-size: 1rem; }
+  .collab-benefit p { font-size: 0.85rem; }
+
+  .collab-section__header h2 { font-size: 1.8rem; }
+  .collab-cta { padding: 56px 40px; }
+  .collab-cta h2 { font-size: 1.7rem; }
+  .collab-cta p { font-size: 1rem; }
+  .collab-cta__btn { padding: 15px 36px; font-size: 1.05rem; }
+
+  .collab-modal { padding: 30px 28px; }
+}
